@@ -135,7 +135,7 @@ export default function TruthTableApp() {
 
         {/* Footer */}
         <p className="text-center text-gray-700 dark:text-gray-400 mt-6 text-sm">
-          © Rifani Husni Mubarok 2025 — Versi Elegan & Interaktif 💡
+          © Rifani Husni Mubarok 2025 
         </p>
       </div>
     </div>
