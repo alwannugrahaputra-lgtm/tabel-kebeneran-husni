@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Poppins', sans-serif;
+  @apply font-poppins transition-all duration-300;
+}
+
+button {
   transition: all 0.3s ease-in-out;
+}
+
+table {
+  @apply border-collapse;
 }
