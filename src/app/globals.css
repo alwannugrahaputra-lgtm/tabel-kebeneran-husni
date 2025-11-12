@@ -2,22 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 🌈 Background & Font Default */
 body {
-  @apply font-poppins transition-all duration-300;
+  @apply font-sans text-gray-900 dark:text-gray-100 transition-all duration-500;
+  background: linear-gradient(135deg, #22d3ee, #3b82f6, #0d9488);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
 }
 
-button {
-  transition: all 0.3s ease-in-out;
+/* 🔄 Animasi Gradasi */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
+/* ✨ Animasi lembut */
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+.animate-pulse {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* 🧠 Tabel Interaktif */
 table {
-  @apply border-collapse;
+  @apply w-full text-center border-collapse rounded-lg overflow-hidden;
 }
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+thead {
+  @apply bg-gradient-to-r from-teal-600 to-blue-600 text-white shadow;
+}
+th, td {
+  @apply px-4 py-3 border border-gray-300 dark:border-gray-700;
+}
+tbody tr:nth-child(even) {
+  @apply bg-gray-50 dark:bg-gray-800;
+}
+tbody tr:hover {
+  @apply bg-cyan-100 dark:bg-teal-700 transition;
 }
 
-.animate-fade-in {
-  animation: fade-in 0.8s ease-out;
+/* 💫 Input dan Tombol */
+input, button {
+  @apply transition-all duration-300;
+}
+button:hover {
+  @apply scale-105;
+}
+
+/* 🌙 Dark Mode Styling */
+.dark body {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  background-size: cover;
 }
