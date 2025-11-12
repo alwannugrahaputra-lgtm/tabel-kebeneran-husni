@@ -15,9 +15,7 @@ export default function TruthTable() {
     { label: "⊕", value: "!=" },
   ];
 
-  const handleClick = (symbol) => {
-    setExpression((prev) => prev + symbol);
-  };
+  const handleClick = (symbol) => setExpression((prev) => prev + symbol);
 
   const generateTable = () => {
     try {
@@ -34,8 +32,8 @@ export default function TruthTable() {
           values[v] = Boolean((i >> (vars.length - idx - 1)) & 1);
         });
         const replaced = expression.replace(/[A-Z]/g, (v) => values[v]);
-        const result = eval(replaced);
-        rows.push({ ...values, hasil: result });
+        const hasil = eval(replaced);
+        rows.push({ ...values, hasil });
       }
       setResult({ vars, rows });
       setError("");
@@ -46,23 +44,23 @@ export default function TruthTable() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-500 via-blue-500 to-teal-500 flex flex-col items-center justify-center p-6 text-gray-900 dark:text-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6">
       <div className="bg-white/90 dark:bg-gray-900/90 rounded-3xl shadow-2xl backdrop-blur-lg p-10 max-w-4xl w-full border border-white/20 dark:border-gray-800/40">
-        <h1 className="text-4xl font-extrabold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-teal-500 to-cyan-400 drop-shadow-lg">
-          🧮 Kalkulator Tabel Kebenaran
+        <h1 className="text-4xl font-extrabold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-500 drop-shadow-lg">
+          🧠 Kalkulator Tabel Kebenaran
         </h1>
 
         <div className="flex flex-col md:flex-row gap-3 mb-6 justify-center">
           <input
             type="text"
-            className="w-full md:w-3/4 p-3 rounded-xl border-2 border-cyan-400 focus:ring-4 focus:ring-cyan-300 outline-none dark:bg-gray-800"
+            className="w-full md:w-3/4 p-3 rounded-xl border-2 border-cyan-400 focus:ring-4 focus:ring-cyan-300 outline-none dark:bg-gray-800 dark:text-white"
             placeholder="Masukkan ekspresi logika (contoh: A && !B)"
             value={expression}
             onChange={(e) => setExpression(e.target.value)}
           />
           <button
             onClick={generateTable}
-            className="bg-gradient-to-r from-blue-600 to-teal-500 hover:from-teal-600 hover:to-blue-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:scale-105 transition-all"
+            className="bg-gradient-to-r from-blue-600 to-teal-500 hover:from-teal-600 hover:to-blue-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg"
           >
             Hitung
           </button>
@@ -73,7 +71,7 @@ export default function TruthTable() {
             <button
               key={s.label}
               onClick={() => handleClick(s.value)}
-              className="bg-cyan-700 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:scale-105 transition-all"
+              className="bg-cyan-700 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md"
             >
               {s.label}
             </button>
@@ -88,37 +86,23 @@ export default function TruthTable() {
 
         {result && (
           <div className="overflow-x-auto">
-            <table className="w-full text-center border-collapse rounded-lg shadow-lg">
-              <thead className="bg-gradient-to-r from-teal-600 to-blue-600 text-white">
+            <table>
+              <thead>
                 <tr>
                   {result.vars.map((v) => (
-                    <th key={v} className="px-4 py-3 border border-white/20">
-                      {v}
-                    </th>
+                    <th key={v}>{v}</th>
                   ))}
-                  <th className="px-4 py-3 border border-white/20">Hasil</th>
+                  <th>Hasil</th>
                 </tr>
               </thead>
               <tbody>
                 {result.rows.map((row, idx) => (
-                  <tr
-                    key={idx}
-                    className={`${
-                      idx % 2 === 0
-                        ? "bg-white/80 dark:bg-gray-800"
-                        : "bg-cyan-50/70 dark:bg-gray-900"
-                    } hover:bg-cyan-100 dark:hover:bg-teal-800 transition`}
-                  >
+                  <tr key={idx}>
                     {result.vars.map((v) => (
-                      <td
-                        key={v}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700"
-                      >
-                        {row[v] ? "T" : "F"}
-                      </td>
+                      <td key={v}>{row[v] ? "T" : "F"}</td>
                     ))}
                     <td
-                      className={`px-4 py-2 border font-bold ${
+                      className={`font-bold ${
                         row.hasil
                           ? "text-teal-700 dark:text-teal-300"
                           : "text-red-600 dark:text-red-400"
@@ -134,7 +118,7 @@ export default function TruthTable() {
         )}
 
         <p className="text-center text-gray-700 dark:text-gray-400 mt-8 text-sm">
-          © Rifani Husni Mubarok 2025 — Versi Premium ✨
+          © Rifani Husni Mubarok 2025
         </p>
       </div>
     </div>
